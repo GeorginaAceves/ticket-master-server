@@ -12,7 +12,7 @@ const ticketsSchema = new Schema({
     },
 
     category: {
-        type: String, enum: ["CINEMA", "THEATER", "CONCERT", "TRANSPORT"]
+        type: String, enum: ["CINEMA", "THEATER", "CONCERT", ]
     },
 
     description: {
@@ -22,15 +22,24 @@ const ticketsSchema = new Schema({
 
     quantity: {
         type: Number,
+        required: true,
+        max: 10,
     },
 
     price_per_ticket: {
         type: Number,
+        required: true,
+        maxlength: 4,
     },
 
     date: {
-       type: Date, 
+       type: Date,
+       required: true, 
     },
+    location: {
+      type: String,
+      required: true, 
+   },
 
 
 },{timestamps: true}

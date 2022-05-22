@@ -23,6 +23,8 @@ const userSchema = new Schema({
 
     tickets: [{ type: Schema.Types.ObjectId, ref: 'Tickets' }],
 
+    shoopinghistory: [{type: Schema.Types.ObjectId, ref: 'Tickets'}],
+
     img: {
       type: String,
     },
