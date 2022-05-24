@@ -7,12 +7,12 @@ const userSchema = new Schema({
       type: String,
       unique: true,
       required: true,
-
     },
     email: {
       type: String,
       unique: true,
       required: true,
+      match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.'],
     },
     password: {
       type: String,
@@ -23,7 +23,7 @@ const userSchema = new Schema({
 
     tickets: [{ type: Schema.Types.ObjectId, ref: 'Tickets' }],
 
-    shoopinghistory: [{type: Schema.Types.ObjectId, ref: 'Tickets'}],
+    shoppinghistory: [{type: Schema.Types.ObjectId, ref: 'Tickets'}],
 
     img: {
       type: String,
@@ -33,6 +33,7 @@ const userSchema = new Schema({
     type: String,
     enum: ["ADMIN", "USER"], default: "USER",
   }
+
 },{timestamps: true}
     
   

@@ -12,7 +12,7 @@ const ticketsSchema = new Schema({
     },
 
     category: {
-        type: String, enum: ["CINEMA", "THEATER", "CONCERT", ]
+        type: String, enum: ["CINEMA", "THEATER", "CONCERT" ]
     },
 
     description: {
