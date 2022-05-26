@@ -4,6 +4,7 @@ const ticketsSchema = new Schema({
   
     img: {
         type: String,
+        default: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Boletos_SIT.png"
       },
 
     title: {

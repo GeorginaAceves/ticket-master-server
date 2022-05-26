@@ -18,7 +18,7 @@ router.get("/alltickets", (req, res) => {
 router.post("/newticket", (req, res) => {
     const {img, title, category, description, quantity, price_per_ticket, date, location, user_id  } = req.body
     console.log(req.body)
-    Tickets.create({img, title, category, description, quantity, price_per_ticket, date, location})
+    Tickets.create({img, title, category, description, quantity: +quantity, price_per_ticket, date, location})
     .then( newTicket => {
         return User.findByIdAndUpdate(user_id, { $push: { tickets: newTicket._id }})
     })
