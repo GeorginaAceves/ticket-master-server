@@ -37,8 +37,17 @@ router.get("/session", (req, res) => {
 
 //signup
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
-
+  const {
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+    agree,
+    remember,
+    interest,
+  } = req.body;
+console.log(req.body)
   if (!username || !email || !password) {
     return res
       .status(400)
@@ -52,16 +61,15 @@ router.post("/signup", isLoggedOut, (req, res) => {
   }
 
   //   ! This use case is using a regular expression to control for special characters and min length
- 
+
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
   if (!regex.test(password)) {
-    return res.status(400).json( {
+    return res.status(400).json({
       errorMessage:
         "Password needs to have at least 8 chars and must contain at least one number, one lowercase and one uppercase letter.",
     });
   }
-  
 
   // Search the database for a user with the username submitted in the form
   User.findOne({ username }).then((found) => {
@@ -80,6 +88,11 @@ router.post("/signup", isLoggedOut, (req, res) => {
           username,
           email,
           password: hashedPassword,
+          firstName,
+          lastName,
+          agree,
+          remember,
+          interest,
         });
       })
       .then((user) => {
@@ -109,9 +122,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email) {
-    return res
-      .status(400)
-      .json({ errorMessage: "Please provide your email." });
+    return res.status(400).json({ errorMessage: "Please provide your email." });
   }
 
   // Here we use the same logic as above
@@ -123,9 +134,9 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   }
 
   // Search the database for a user with the email submitted in the form
-  
+
   User.findOne({ email })
-  .populate("tickets")
+    .populate("tickets")
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {

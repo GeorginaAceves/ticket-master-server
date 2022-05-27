@@ -19,6 +19,12 @@ const userSchema = new Schema({
       required: true,
     },
 
+    agree: {type: Boolean}, 
+
+    remember: {type: Boolean},
+
+    interest: {type: String},
+
     favorites: [{ type: Schema.Types.ObjectId, ref: 'Favorites' }],
 
     tickets: [{ type: Schema.Types.ObjectId, ref: 'Tickets' }],
